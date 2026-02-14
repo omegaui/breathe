@@ -14,6 +14,7 @@ class UnknownStateView extends StatelessWidget {
           kDebugMode
               ? "An Unknown State Encountered: ${state.runtimeType}, please implement this state first."
               : "Sorry, some error occurred, please try again, if the issue persist, please contact us.",
+          textAlign: .center,
         ),
       ),
     );
