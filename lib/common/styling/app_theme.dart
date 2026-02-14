@@ -35,8 +35,8 @@ abstract class AppTheme {
     }
   }
 
-  static List<VoidCallback> _listeners = [];
-
+  static final List<VoidCallback> _listeners = [];
+  
   static Future<void> toggle() async {
     if (isLight) {
       _instance = DarkTheme();
