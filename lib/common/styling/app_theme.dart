@@ -3,184 +3,209 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
-// TOOD: Dark mode not yet complete!
+class BreatheThemeExtension extends ThemeExtension<BreatheThemeExtension> {
+  final Color backgroundColor;
+  final Color borderColor;
+  final Color primary;
+  final Color textTitle;
+  final Color textSubtitle;
+  final Color chipBackground;
+  final Color chipActiveBackground;
+  final Color chipActiveBorder;
+  final Color durationSelectorBackground;
+  final Color durationSelectorBorder;
+  final Color bubbleColor;
+  final Color bubbleBorderColor;
+  final Color indicatorBackground;
+  final Color buttonBackground;
+  final Color buttonTextColor;
+  final BoxDecoration homePageBackgroundDecoration;
 
-abstract class AppTheme {
-  Color get backgroundColor;
-  Color get borderColor;
-  Color get primary;
-  Color get textTitle;
-  Color get textSubtitle;
-  Color get chipBackground;
-  Color get chipActiveBackground;
-  Color get chipActiveBorder;
-  Color get durationSelectorBackground;
-  Color get durationSelectorBorder;
-  Color get bubbleColor;
-  Color get bubbleBorderColor;
-  Color get indicatorBackground;
-  Color get buttonBackground;
-  Color get buttonTextColor;
-  BoxDecoration get homePageBackgroundDecoration;
+  const BreatheThemeExtension({
+    required this.backgroundColor,
+    required this.borderColor,
+    required this.primary,
+    required this.textTitle,
+    required this.textSubtitle,
+    required this.chipBackground,
+    required this.chipActiveBackground,
+    required this.chipActiveBorder,
+    required this.durationSelectorBackground,
+    required this.durationSelectorBorder,
+    required this.bubbleColor,
+    required this.bubbleBorderColor,
+    required this.indicatorBackground,
+    required this.buttonBackground,
+    required this.buttonTextColor,
+    required this.homePageBackgroundDecoration,
+  });
 
-  static bool get isLight => _instance.runtimeType == LightTheme;
+  static const light = BreatheThemeExtension(
+    backgroundColor: Colors.white,
+    borderColor: Color(0x0A000000),
+    primary: Color(0xFF630068),
+    textTitle: Color(0xFF141414),
+    textSubtitle: Color(0xFF737373),
+    chipBackground: Color(0xFFF5F5F5),
+    chipActiveBackground: Color(0xFFFFF8F0),
+    chipActiveBorder: Color(0xFFE47B00),
+    durationSelectorBackground: Color(0xFFF7F7F7),
+    durationSelectorBorder: Color(0xFFF5F5F5),
+    bubbleColor: Color(0xFF7B2D8E),
+    bubbleBorderColor: Color(0x1F7B2D8E),
+    indicatorBackground: Color(0xFFEEE5F0),
+    buttonBackground: Color(0xFF630068),
+    buttonTextColor: Color(0xFF2C002E),
+    homePageBackgroundDecoration: BoxDecoration(
+      gradient: LinearGradient(
+        colors: [Color(0x14630068), Color(0x14FF8A00)],
+        begin: Alignment.topCenter,
+        end: Alignment.bottomCenter,
+      ),
+    ),
+  );
 
-  static AppTheme _instance = LightTheme(); // default is light
-  static AppTheme get instance => _instance;
-  static void init(bool isLight) {
-    if (isLight) {
-      _instance = LightTheme();
-    } else {
-      _instance = DarkTheme();
-    }
+  static const dark = BreatheThemeExtension(
+    backgroundColor: Color(0x0DFFFFFF),
+    borderColor: Color(0x0A000000),
+    primary: Color(0xFFFFFFFF),
+    textTitle: Color(0xFFFFFFFF),
+    textSubtitle: Color(0xFFA3A3A3),
+    chipBackground: Color(0xFF141414),
+    chipActiveBackground: Color(0xFF5C2D00),
+    chipActiveBorder: Color(0xFFE47B00),
+    durationSelectorBackground: Color(0xFF141414),
+    durationSelectorBorder: Color(0xFF292929),
+    bubbleColor: Color(0xFFE2D1E3),
+    bubbleBorderColor: Color(0x1F7B2D8E),
+    indicatorBackground: Color(0xFFEEE5F0),
+    buttonBackground: Color(0xFF813685),
+    buttonTextColor: Color(0xFF2C002E),
+    homePageBackgroundDecoration: BoxDecoration(
+      gradient: LinearGradient(
+        colors: [Color(0xFF21182D), Color(0xFF3D2760)],
+        begin: Alignment.topCenter,
+        end: Alignment.bottomCenter,
+      ),
+    ),
+  );
+
+  @override
+  BreatheThemeExtension copyWith({
+    Color? backgroundColor,
+    Color? borderColor,
+    Color? primary,
+    Color? textTitle,
+    Color? textSubtitle,
+    Color? chipBackground,
+    Color? chipActiveBackground,
+    Color? chipActiveBorder,
+    Color? durationSelectorBackground,
+    Color? durationSelectorBorder,
+    Color? bubbleColor,
+    Color? bubbleBorderColor,
+    Color? indicatorBackground,
+    Color? buttonBackground,
+    Color? buttonTextColor,
+    BoxDecoration? homePageBackgroundDecoration,
+  }) {
+    return BreatheThemeExtension(
+      backgroundColor: backgroundColor ?? this.backgroundColor,
+      borderColor: borderColor ?? this.borderColor,
+      primary: primary ?? this.primary,
+      textTitle: textTitle ?? this.textTitle,
+      textSubtitle: textSubtitle ?? this.textSubtitle,
+      chipBackground: chipBackground ?? this.chipBackground,
+      chipActiveBackground: chipActiveBackground ?? this.chipActiveBackground,
+      chipActiveBorder: chipActiveBorder ?? this.chipActiveBorder,
+      durationSelectorBackground:
+          durationSelectorBackground ?? this.durationSelectorBackground,
+      durationSelectorBorder:
+          durationSelectorBorder ?? this.durationSelectorBorder,
+      bubbleColor: bubbleColor ?? this.bubbleColor,
+      bubbleBorderColor: bubbleBorderColor ?? this.bubbleBorderColor,
+      indicatorBackground: indicatorBackground ?? this.indicatorBackground,
+      buttonBackground: buttonBackground ?? this.buttonBackground,
+      buttonTextColor: buttonTextColor ?? this.buttonTextColor,
+      homePageBackgroundDecoration:
+          homePageBackgroundDecoration ?? this.homePageBackgroundDecoration,
+    );
   }
 
-  static final List<VoidCallback> _listeners = [];
-  
+  @override
+  BreatheThemeExtension lerp(
+    covariant BreatheThemeExtension? other,
+    double t,
+  ) {
+    if (other == null) return this;
+    return BreatheThemeExtension(
+      backgroundColor: Color.lerp(backgroundColor, other.backgroundColor, t)!,
+      borderColor: Color.lerp(borderColor, other.borderColor, t)!,
+      primary: Color.lerp(primary, other.primary, t)!,
+      textTitle: Color.lerp(textTitle, other.textTitle, t)!,
+      textSubtitle: Color.lerp(textSubtitle, other.textSubtitle, t)!,
+      chipBackground: Color.lerp(chipBackground, other.chipBackground, t)!,
+      chipActiveBackground:
+          Color.lerp(chipActiveBackground, other.chipActiveBackground, t)!,
+      chipActiveBorder:
+          Color.lerp(chipActiveBorder, other.chipActiveBorder, t)!,
+      durationSelectorBackground: Color.lerp(
+        durationSelectorBackground,
+        other.durationSelectorBackground,
+        t,
+      )!,
+      durationSelectorBorder:
+          Color.lerp(durationSelectorBorder, other.durationSelectorBorder, t)!,
+      bubbleColor: Color.lerp(bubbleColor, other.bubbleColor, t)!,
+      bubbleBorderColor:
+          Color.lerp(bubbleBorderColor, other.bubbleBorderColor, t)!,
+      indicatorBackground:
+          Color.lerp(indicatorBackground, other.indicatorBackground, t)!,
+      buttonBackground:
+          Color.lerp(buttonBackground, other.buttonBackground, t)!,
+      buttonTextColor: Color.lerp(buttonTextColor, other.buttonTextColor, t)!,
+      homePageBackgroundDecoration: t < 0.5
+          ? homePageBackgroundDecoration
+          : other.homePageBackgroundDecoration,
+    );
+  }
+}
+
+class AppTheme {
+  AppTheme._();
+
+  static ThemeData get lightTheme => ThemeData(
+        brightness: Brightness.light,
+        extensions: const [BreatheThemeExtension.light],
+      );
+
+  static ThemeData get darkTheme => ThemeData(
+        brightness: Brightness.dark,
+        extensions: const [BreatheThemeExtension.dark],
+      );
+
+  static bool get isLight => !Get.isDarkMode;
+
   static Future<void> toggle() async {
-    if (isLight) {
-      _instance = DarkTheme();
-    } else {
-      _instance = LightTheme();
-    }
-    for (final listener in _listeners) {
-      listener();
-    }
+    final goingLight = Get.isDarkMode;
+    Get.changeThemeMode(goingLight ? ThemeMode.light : ThemeMode.dark);
     SystemChrome.setSystemUIOverlayStyle(
       SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,
         systemNavigationBarColor: Colors.transparent,
-        statusBarIconBrightness: isLight ? Brightness.dark : Brightness.light,
-        systemNavigationBarIconBrightness: isLight
-            ? Brightness.dark
-            : Brightness.light,
+        statusBarIconBrightness:
+            goingLight ? Brightness.dark : Brightness.light,
+        systemNavigationBarIconBrightness:
+            goingLight ? Brightness.dark : Brightness.light,
       ),
     );
-    await Get.find<SharedStorage>().set('theme', isLight ? 'light' : 'dark');
-  }
-
-  static void watchToggle(VoidCallback onChange) {
-    _listeners.add(onChange);
-  }
-
-  static void unwatchToggle(VoidCallback onChange) {
-    _listeners.remove(onChange);
+    await Get.find<SharedStorage>().set('theme', goingLight ? 'light' : 'dark');
   }
 }
 
-class LightTheme extends AppTheme {
-  @override
-  Color get backgroundColor => Colors.white;
+extension BreatheThemeContext on BuildContext {
+  BreatheThemeExtension get colors =>
+      Theme.of(this).extension<BreatheThemeExtension>()!;
 
-  @override
-  Color get borderColor => Colors.black.withAlpha((0.04 * 255.0).round());
-
-  @override
-  Color get primary => Color(0xFF630068);
-
-  @override
-  Color get textTitle => Color(0xFF141414);
-
-  @override
-  Color get textSubtitle => Color(0xFF737373);
-
-  @override
-  Color get chipBackground => Color(0xFFF5F5F5);
-
-  @override
-  Color get chipActiveBackground => Color(0xFFFFF8F0);
-
-  @override
-  Color get chipActiveBorder => Color(0xFFE47B00);
-
-  @override
-  Color get durationSelectorBackground => Color(0xFFF7F7F7);
-
-  @override
-  Color get durationSelectorBorder => Color(0xFFF5F5F5);
-
-  @override
-  Color get bubbleColor => Color(0xFF7B2D8E);
-
-  @override
-  Color get bubbleBorderColor =>
-      Color(0xFF7B2D8E).withAlpha((0.12 * 255).round());
-
-  @override
-  Color get indicatorBackground => Color(0xFFEEE5F0);
-
-  @override
-  Color get buttonBackground => Color(0xFF630068);
-
-  @override
-  Color get buttonTextColor => Color(0xFF2C002E);
-
-  @override
-  BoxDecoration get homePageBackgroundDecoration => BoxDecoration(
-    gradient: LinearGradient(
-      colors: [
-        Color(0xFF630068).withAlpha((0.08 * 255).round()),
-        Color((0xFFFF8A00)).withAlpha((0.08 * 255).round()),
-      ],
-      begin: .topCenter,
-      end: .bottomCenter,
-    ),
-  );
-}
-
-class DarkTheme extends AppTheme {
-  @override
-  Color get backgroundColor => Colors.white.withAlpha((0.05 * 255).round());
-
-  @override
-  Color get borderColor => Colors.black.withAlpha((0.04 * 255.0).round());
-
-  @override
-  Color get primary => Color(0xFFFFFFFF);
-
-  @override
-  Color get textTitle => Color(0xFFFFFFFF);
-
-  @override
-  Color get textSubtitle => Color(0xFFA3A3A3);
-
-  @override
-  Color get chipBackground => Color(0xFF141414);
-
-  @override
-  Color get chipActiveBackground => Color(0xFF5C2D00);
-
-  @override
-  Color get chipActiveBorder => Color(0xFFE47B00);
-
-  @override
-  Color get durationSelectorBackground => Color(0xFF141414);
-
-  @override
-  Color get durationSelectorBorder => Color(0xFF292929);
-
-  @override
-  Color get bubbleColor => Color(0xFFE2D1E3);
-
-  @override
-  Color get bubbleBorderColor =>
-      Color(0xFF7B2D8E).withAlpha((0.12 * 255).round());
-
-  @override
-  Color get indicatorBackground => Color(0xFFEEE5F0);
-
-  @override
-  Color get buttonBackground => Color(0xFF813685);
-
-  @override
-  Color get buttonTextColor => Color(0xFF2C002E);
-
-  @override
-  BoxDecoration get homePageBackgroundDecoration => BoxDecoration(
-    gradient: LinearGradient(
-      colors: [Color(0xFF21182D), Color((0xFF3D2760))],
-      begin: .topCenter,
-      end: .bottomCenter,
-    ),
-  );
+  bool get isLightMode => Theme.of(this).brightness == Brightness.light;
 }

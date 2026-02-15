@@ -62,12 +62,6 @@ class _ExcerciseLoadedStateViewState extends State<ExcerciseLoadedStateView> {
       ); // no need to await file is small
     }
     _startTimer();
-    AppTheme.watchToggle(watchThemeChanges);
-  }
-
-  void watchThemeChanges() {
-    // refresh state on theme changes
-    widget.controller.refreshUICallback();
   }
 
   void _startTimer() {
@@ -210,16 +204,17 @@ class _ExcerciseLoadedStateViewState extends State<ExcerciseLoadedStateView> {
       _bubbleScale = 0.33;
     }
     final insets = MediaQuery.paddingOf(context);
+    final colors = context.colors;
     return Scaffold(
       extendBody: true,
       extendBodyBehindAppBar: true,
-      backgroundColor: AppTheme.instance.backgroundColor,
+      backgroundColor: colors.backgroundColor,
       primary: true,
       body: Stack(
         children: [
           Positioned.fill(
             child: Container(
-              decoration: AppTheme.instance.homePageBackgroundDecoration,
+              decoration: colors.homePageBackgroundDecoration,
             ),
           ),
           if (_currentState != ExcerciseStates.complete) ...[
@@ -237,7 +232,7 @@ class _ExcerciseLoadedStateViewState extends State<ExcerciseLoadedStateView> {
                       style: ConfigurableTextStyle.create(FontSizes.small)
                           .makeItalic()
                           .useLato()
-                          .withColor(AppTheme.instance.textSubtitle),
+                          .withColor(colors.textSubtitle),
                     ),
                     Gap(91),
                     SizedBox.square(
@@ -250,17 +245,17 @@ class _ExcerciseLoadedStateViewState extends State<ExcerciseLoadedStateView> {
                           decoration: BoxDecoration(
                             gradient: RadialGradient(
                               colors: [
-                                AppTheme.instance.bubbleColor.withAlpha(
+                                colors.bubbleColor.withAlpha(
                                   (0.20 * 255).round(),
                                 ),
-                                AppTheme.instance.bubbleColor.withAlpha(
+                                colors.bubbleColor.withAlpha(
                                   (0.05 * 255).round(),
                                 ),
                               ],
                             ),
                             borderRadius: .circular(100),
                             border: Border.all(
-                              color: AppTheme.instance.bubbleBorderColor,
+                              color: colors.bubbleBorderColor,
                             ),
                           ),
                           child: Center(
@@ -279,14 +274,14 @@ class _ExcerciseLoadedStateViewState extends State<ExcerciseLoadedStateView> {
                       _phaseTitle,
                       style: ConfigurableTextStyle.create(
                         FontSizes.large,
-                      ).withColor(AppTheme.instance.textTitle).makeBold(),
+                      ).withColor(colors.textTitle).makeBold(),
                     ),
                     Gap(6),
                     Text(
                       _phaseSubTitle,
                       style: ConfigurableTextStyle.create(
                         FontSizes.small,
-                      ).withColor(AppTheme.instance.textSubtitle),
+                      ).withColor(colors.textSubtitle),
                     ),
                     Gap(36),
                     SizedBox(
@@ -299,9 +294,9 @@ class _ExcerciseLoadedStateViewState extends State<ExcerciseLoadedStateView> {
                         builder: (context, value, child) {
                           return LinearProgressIndicator(
                             key: ValueKey(value),
-                            color: AppTheme.instance.primary,
+                            color: colors.primary,
                             backgroundColor:
-                                AppTheme.instance.indicatorBackground,
+                                colors.indicatorBackground,
                             value: value,
                             borderRadius: .circular(20),
                           );
@@ -313,7 +308,7 @@ class _ExcerciseLoadedStateViewState extends State<ExcerciseLoadedStateView> {
                       'Cycles $_currentRound of ${widget.state.settings.rounds}',
                       style: ConfigurableTextStyle.create(
                         FontSizes.small,
-                      ).withColor(AppTheme.instance.primary),
+                      ).withColor(colors.primary),
                     ),
                     Gap(40),
                     GestureDetector(
@@ -326,7 +321,7 @@ class _ExcerciseLoadedStateViewState extends State<ExcerciseLoadedStateView> {
                         width: 131,
                         height: 56,
                         decoration: BoxDecoration(
-                          color: AppTheme.instance.indicatorBackground,
+                          color: colors.indicatorBackground,
                           borderRadius: .circular(32),
                         ),
                         child: Center(
@@ -346,7 +341,7 @@ class _ExcerciseLoadedStateViewState extends State<ExcerciseLoadedStateView> {
                                     ConfigurableTextStyle.create(
                                       FontSizes.regular,
                                     ).makeBold().withColor(
-                                      AppTheme.instance.buttonTextColor,
+                                      colors.buttonTextColor,
                                     ),
                               ),
                             ],
@@ -377,10 +372,10 @@ class _ExcerciseLoadedStateViewState extends State<ExcerciseLoadedStateView> {
                     ),
                     Gap(24),
                     Text(
-                      'You did it! 🎉',
+                      'You did it! \u{1F389}',
                       style: ConfigurableTextStyle.create(
                         FontSizes.large,
-                      ).makeBold().withColor(AppTheme.instance.textTitle),
+                      ).makeBold().withColor(colors.textTitle),
                     ),
                     Gap(16),
                     Text(
@@ -388,7 +383,7 @@ class _ExcerciseLoadedStateViewState extends State<ExcerciseLoadedStateView> {
                       textAlign: .center,
                       style: ConfigurableTextStyle.create(
                         FontSizes.small,
-                      ).withColor(AppTheme.instance.textSubtitle),
+                      ).withColor(colors.textSubtitle),
                     ),
                     Gap(24),
                     GestureDetector(
@@ -399,7 +394,7 @@ class _ExcerciseLoadedStateViewState extends State<ExcerciseLoadedStateView> {
                         width: 271,
                         height: 56,
                         decoration: BoxDecoration(
-                          color: AppTheme.instance.primary,
+                          color: colors.primary,
                           borderRadius: .circular(32),
                         ),
                         child: Center(
@@ -411,7 +406,7 @@ class _ExcerciseLoadedStateViewState extends State<ExcerciseLoadedStateView> {
                                 style:
                                     ConfigurableTextStyle.create(FontSizes.base)
                                         .withColor(
-                                          AppTheme.instance.backgroundColor,
+                                          colors.backgroundColor,
                                         )
                                         .useLato()
                                         .makeBold(),
@@ -436,7 +431,7 @@ class _ExcerciseLoadedStateViewState extends State<ExcerciseLoadedStateView> {
                         width: 131,
                         height: 56,
                         decoration: BoxDecoration(
-                          color: AppTheme.instance.backgroundColor,
+                          color: colors.backgroundColor,
                           borderRadius: .circular(32),
                         ),
                         child: Center(
@@ -444,7 +439,7 @@ class _ExcerciseLoadedStateViewState extends State<ExcerciseLoadedStateView> {
                             'Back to set up',
                             style: ConfigurableTextStyle.create(
                               FontSizes.regular,
-                            ).makeBold().withColor(AppTheme.instance.textTitle),
+                            ).makeBold().withColor(colors.textTitle),
                           ),
                         ),
                       ),
@@ -465,11 +460,11 @@ class _ExcerciseLoadedStateViewState extends State<ExcerciseLoadedStateView> {
                     Get.back();
                   },
                   style: IconButton.styleFrom(
-                    backgroundColor: AppTheme.instance.borderColor,
+                    backgroundColor: colors.borderColor,
                   ),
                   icon: Icon(
                     Icons.close,
-                    color: AppTheme.instance.textSubtitle,
+                    color: colors.textSubtitle,
                   ),
                 ),
               ),
@@ -484,10 +479,10 @@ class _ExcerciseLoadedStateViewState extends State<ExcerciseLoadedStateView> {
                 child: IconButton(
                   onPressed: () => AppTheme.toggle(),
                   style: IconButton.styleFrom(
-                    backgroundColor: AppTheme.instance.borderColor,
+                    backgroundColor: colors.borderColor,
                   ),
                   icon: Image(
-                    image: AppTheme.isLight
+                    image: context.isLightMode
                         ? AppAssets.darkMode
                         : AppAssets.lightMode,
                     width: 20.07,
@@ -505,7 +500,6 @@ class _ExcerciseLoadedStateViewState extends State<ExcerciseLoadedStateView> {
   void dispose() {
     _timer?.cancel();
     _soundPlayer.dispose();
-    AppTheme.unwatchToggle(watchThemeChanges);
     super.dispose();
   }
 }

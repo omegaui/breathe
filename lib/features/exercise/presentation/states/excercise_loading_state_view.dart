@@ -25,13 +25,13 @@ class _ExcerciseLoadingStateViewState extends State<ExcerciseLoadingStateView> {
     return Scaffold(
       extendBody: true,
       extendBodyBehindAppBar: true,
-      backgroundColor: AppTheme.instance.backgroundColor,
+      backgroundColor: context.colors.backgroundColor,
       primary: true,
       body: Stack(
         children: [
           Positioned.fill(
             child: Container(
-              decoration: AppTheme.instance.homePageBackgroundDecoration,
+              decoration: context.colors.homePageBackgroundDecoration,
             ),
           ),
           Align(
@@ -39,7 +39,7 @@ class _ExcerciseLoadingStateViewState extends State<ExcerciseLoadingStateView> {
               padding: EdgeInsets.only(top: insets.top, bottom: insets.bottom),
               child: Center(
                 child: CircularProgressIndicator(
-                  color: AppTheme.instance.primary,
+                  color: context.colors.primary,
                 ),
               ),
             ),

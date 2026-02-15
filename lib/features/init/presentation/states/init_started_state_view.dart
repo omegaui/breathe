@@ -23,7 +23,7 @@ class InitStartedStateView extends StatelessWidget {
     return Scaffold(
       extendBody: true,
       extendBodyBehindAppBar: true,
-      backgroundColor: AppTheme.instance.backgroundColor,
+      backgroundColor: context.colors.backgroundColor,
       body: Stack(
         children: [
           Align(

@@ -38,38 +38,21 @@ class _HomeLoadedStateViewState extends State<HomeLoadedStateView> {
   var _allowSound = true;
 
   @override
-  void initState() {
-    super.initState();
-    AppTheme.watchToggle(watchThemeChanges);
-  }
-
-  void watchThemeChanges() {
-    // refresh state on theme changes
-    widget.controller.refreshUICallback();
-  }
-
-  @override
   Widget build(BuildContext context) {
     final insets = MediaQuery.paddingOf(context);
+    final colors = context.colors;
     return Scaffold(
       extendBody: true,
       extendBodyBehindAppBar: true,
-      backgroundColor: AppTheme.instance.backgroundColor,
+      backgroundColor: colors.backgroundColor,
       primary: true,
       body: Stack(
         children: [
           Positioned.fill(
             child: Container(
-              decoration: AppTheme.instance.homePageBackgroundDecoration,
+              decoration: colors.homePageBackgroundDecoration,
             ),
           ),
-          // TODO: Add clouds if enough time available
-          // Positioned.fill(
-          //   child: Image(
-          //     image: AppAssets.lightBackground,
-          //     fit: BoxFit.fill,
-          //   ),
-          // ),
           Align(
             child: Padding(
               padding: EdgeInsets.only(top: insets.top, bottom: insets.bottom),
@@ -80,7 +63,7 @@ class _HomeLoadedStateViewState extends State<HomeLoadedStateView> {
                       "Set your breathing pace",
                       style: ConfigurableTextStyle.create(
                         FontSizes.large,
-                      ).withColor(AppTheme.instance.primary).makeBold(),
+                      ).withColor(colors.primary).makeBold(),
                     ),
                     Gap(17),
                     Text(
@@ -88,16 +71,16 @@ class _HomeLoadedStateViewState extends State<HomeLoadedStateView> {
                       textAlign: .center,
                       style: ConfigurableTextStyle.create(
                         FontSizes.regular,
-                      ).withColor(AppTheme.instance.textSubtitle),
+                      ).withColor(colors.textSubtitle),
                     ),
                     Gap(18),
                     AnimatedContainer(
                       duration: 250.ms,
                       decoration: BoxDecoration(
-                        color: AppTheme.instance.backgroundColor,
+                        color: colors.backgroundColor,
                         borderRadius: BorderRadius.circular(22),
                         border: Border.all(
-                          color: AppTheme.instance.borderColor,
+                          color: colors.borderColor,
                         ),
                       ),
                       width: 321,
@@ -110,17 +93,18 @@ class _HomeLoadedStateViewState extends State<HomeLoadedStateView> {
                             "Breath duration",
                             style:
                                 ConfigurableTextStyle.create(FontSizes.medium)
-                                    .withColor(AppTheme.instance.textTitle)
+                                    .withColor(colors.textTitle)
                                     .makeSemiBold(),
                           ),
                           Text(
                             "Seconds per phase",
                             style: ConfigurableTextStyle.create(
                               FontSizes.small,
-                            ).withColor(AppTheme.instance.textSubtitle),
+                            ).withColor(colors.textSubtitle),
                           ),
                           Gap(10),
                           buildChips(
+                            context,
                             _durationChips,
                             _selectedDurationChip,
                             onSelected: (value) {
@@ -134,17 +118,18 @@ class _HomeLoadedStateViewState extends State<HomeLoadedStateView> {
                             "Rounds",
                             style:
                                 ConfigurableTextStyle.create(FontSizes.medium)
-                                    .withColor(AppTheme.instance.textTitle)
+                                    .withColor(colors.textTitle)
                                     .makeSemiBold(),
                           ),
                           Text(
                             "Full box breathing cycles",
                             style: ConfigurableTextStyle.create(
                               FontSizes.small,
-                            ).withColor(AppTheme.instance.textSubtitle),
+                            ).withColor(colors.textSubtitle),
                           ),
                           Gap(10),
                           buildChips(
+                            context,
                             _roundsChips,
                             _selectedRoundChip,
                             onSelected: (value) {
@@ -160,14 +145,14 @@ class _HomeLoadedStateViewState extends State<HomeLoadedStateView> {
                               "Advanced timing",
                               style:
                                   ConfigurableTextStyle.create(FontSizes.medium)
-                                      .withColor(AppTheme.instance.textTitle)
+                                      .withColor(colors.textTitle)
                                       .makeSemiBold(),
                             ),
                             subtitle: Text(
                               "Set different durations for each phase",
                               style: ConfigurableTextStyle.create(
                                 FontSizes.small,
-                              ).withColor(AppTheme.instance.textSubtitle),
+                              ).withColor(colors.textSubtitle),
                             ),
                             trailing: SizedBox(
                               width: 12,
@@ -183,10 +168,10 @@ class _HomeLoadedStateViewState extends State<HomeLoadedStateView> {
                                 _isAdvancedOptionsVisible = value;
                               });
                             },
-                            backgroundColor: AppTheme.instance.backgroundColor,
+                            backgroundColor: colors.backgroundColor,
                             collapsedBackgroundColor:
-                                AppTheme.instance.backgroundColor,
-                            splashColor: AppTheme.instance.backgroundColor,
+                                colors.backgroundColor,
+                            splashColor: colors.backgroundColor,
                             tilePadding: .all(0),
                             shape: RoundedRectangleBorder(
                               borderRadius: .circular(12),
@@ -194,6 +179,7 @@ class _HomeLoadedStateViewState extends State<HomeLoadedStateView> {
                             children: [
                               Gap(8),
                               buildDurationSelector(
+                                context,
                                 'Breathe in',
                                 _breathInDuration,
                                 onChanged: (value) {
@@ -204,6 +190,7 @@ class _HomeLoadedStateViewState extends State<HomeLoadedStateView> {
                               ),
                               Gap(8),
                               buildDurationSelector(
+                                context,
                                 'Hold in',
                                 _holdInDuration,
                                 onChanged: (value) {
@@ -214,6 +201,7 @@ class _HomeLoadedStateViewState extends State<HomeLoadedStateView> {
                               ),
                               Gap(8),
                               buildDurationSelector(
+                                context,
                                 'Breath out',
                                 _breathOutDuration,
                                 onChanged: (value) {
@@ -224,6 +212,7 @@ class _HomeLoadedStateViewState extends State<HomeLoadedStateView> {
                               ),
                               Gap(8),
                               buildDurationSelector(
+                                context,
                                 'Hold out',
                                 _holdOutDuration,
                                 onChanged: (value) {
@@ -239,20 +228,19 @@ class _HomeLoadedStateViewState extends State<HomeLoadedStateView> {
                               "Sound",
                               style:
                                   ConfigurableTextStyle.create(FontSizes.medium)
-                                      .withColor(AppTheme.instance.textTitle)
+                                      .withColor(colors.textTitle)
                                       .makeSemiBold(),
                             ),
                             subtitle: Text(
                               "Gentle chime between phases",
                               style: ConfigurableTextStyle.create(
                                 FontSizes.small,
-                              ).withColor(AppTheme.instance.textSubtitle),
+                              ).withColor(colors.textSubtitle),
                             ),
                             trailing: Switch(
                               value: _allowSound,
                               trackColor: WidgetStatePropertyAll(
-                                LightTheme()
-                                    .primary, // always take light theme's color for this switch, we can optimize code later
+                                Color(0xFF630068),
                               ),
                               thumbColor: WidgetStatePropertyAll(Colors.white),
                               padding: .all(0),
@@ -297,7 +285,7 @@ class _HomeLoadedStateViewState extends State<HomeLoadedStateView> {
                         width: 271,
                         height: 56,
                         decoration: BoxDecoration(
-                          color: AppTheme.instance.buttonBackground,
+                          color: colors.buttonBackground,
                           borderRadius: .circular(32),
                         ),
                         child: Center(
@@ -309,10 +297,8 @@ class _HomeLoadedStateViewState extends State<HomeLoadedStateView> {
                                 style:
                                     ConfigurableTextStyle.create(FontSizes.base)
                                         .withColor(
-                                          AppTheme.isLight
-                                              ? AppTheme
-                                                    .instance
-                                                    .backgroundColor
+                                          context.isLightMode
+                                              ? colors.backgroundColor
                                               : Colors.white,
                                         )
                                         .useLato()
@@ -344,10 +330,10 @@ class _HomeLoadedStateViewState extends State<HomeLoadedStateView> {
                 child: IconButton(
                   onPressed: () => AppTheme.toggle(),
                   style: IconButton.styleFrom(
-                    backgroundColor: AppTheme.instance.borderColor,
+                    backgroundColor: colors.borderColor,
                   ),
                   icon: Image(
-                    image: AppTheme.isLight
+                    image: context.isLightMode
                         ? AppAssets.darkMode
                         : AppAssets.lightMode,
                     width: 20.07,
@@ -362,11 +348,13 @@ class _HomeLoadedStateViewState extends State<HomeLoadedStateView> {
   }
 
   Widget buildChips(
+    BuildContext context,
     List<String> values,
     String selected, {
     required void Function(String value) onSelected,
     bool horizontalPadding = true,
   }) {
+    final colors = context.colors;
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Wrap(
@@ -387,20 +375,20 @@ class _HomeLoadedStateViewState extends State<HomeLoadedStateView> {
                     style: ConfigurableTextStyle.create(FontSizes.regular)
                         .withColor(
                           isSelected
-                              ? AppTheme.instance.chipActiveBorder
-                              : AppTheme.instance.textSubtitle,
+                              ? colors.chipActiveBorder
+                              : colors.textSubtitle,
                         )
                         .makeSemiBold(onlyIf: () => isSelected),
                   ),
                 ),
                 backgroundColor: isSelected
-                    ? AppTheme.instance.chipActiveBackground
-                    : AppTheme.instance.chipBackground,
+                    ? colors.chipActiveBackground
+                    : colors.chipBackground,
                 shape: RoundedRectangleBorder(borderRadius: .circular(50)),
                 side: BorderSide(
                   width: 1,
                   color: isSelected
-                      ? AppTheme.instance.chipActiveBorder
+                      ? colors.chipActiveBorder
                       : Colors.transparent,
                 ),
               ),
@@ -412,17 +400,19 @@ class _HomeLoadedStateViewState extends State<HomeLoadedStateView> {
   }
 
   Widget buildDurationSelector(
+    BuildContext context,
     String title,
     int value, {
     required void Function(int value) onChanged,
   }) {
+    final colors = context.colors;
     return Container(
       height: 54,
       padding: .only(left: 12, right: 24),
       decoration: BoxDecoration(
-        color: AppTheme.instance.durationSelectorBackground,
+        color: colors.durationSelectorBackground,
         borderRadius: .circular(8),
-        border: Border.all(color: AppTheme.instance.durationSelectorBorder),
+        border: Border.all(color: colors.durationSelectorBorder),
       ),
       child: Row(
         mainAxisAlignment: .spaceBetween,
@@ -431,7 +421,7 @@ class _HomeLoadedStateViewState extends State<HomeLoadedStateView> {
             title,
             style: ConfigurableTextStyle.create(
               FontSizes.regular,
-            ).withColor(AppTheme.instance.textTitle).makeSemiBold(),
+            ).withColor(colors.textTitle).makeSemiBold(),
           ),
           SizedBox(
             width: 100, // making it constant to align contents properly
@@ -448,14 +438,14 @@ class _HomeLoadedStateViewState extends State<HomeLoadedStateView> {
                     width: 26,
                     height: 26,
                     decoration: BoxDecoration(
-                      color: AppTheme.instance.backgroundColor,
+                      color: colors.backgroundColor,
                       borderRadius: .circular(50),
                     ),
                     child: Center(
                       child: Icon(
                         Icons.remove,
                         size: 18,
-                        color: AppTheme.instance.textTitle,
+                        color: colors.textTitle,
                       ),
                     ),
                   ),
@@ -464,7 +454,7 @@ class _HomeLoadedStateViewState extends State<HomeLoadedStateView> {
                   '${value}s',
                   style: ConfigurableTextStyle.create(
                     FontSizes.medium,
-                  ).useLato().withColor(AppTheme.instance.textTitle),
+                  ).useLato().withColor(colors.textTitle),
                 ),
                 GestureDetector(
                   onTap: () => onChanged(value + 1),
@@ -472,14 +462,14 @@ class _HomeLoadedStateViewState extends State<HomeLoadedStateView> {
                     width: 26,
                     height: 26,
                     decoration: BoxDecoration(
-                      color: AppTheme.instance.backgroundColor,
+                      color: colors.backgroundColor,
                       borderRadius: .circular(50),
                     ),
                     child: Center(
                       child: Icon(
                         Icons.add,
                         size: 18,
-                        color: AppTheme.instance.textTitle,
+                        color: colors.textTitle,
                       ),
                     ),
                   ),
@@ -490,11 +480,5 @@ class _HomeLoadedStateViewState extends State<HomeLoadedStateView> {
         ],
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    AppTheme.unwatchToggle(watchThemeChanges);
-    super.dispose();
   }
 }

@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:breathe/common/styling/app_theme.dart';
 import 'package:breathe/core/architecture/error_tracker.dart';
 import 'package:breathe/core/injection/dependency_injection.dart';
 import 'package:breathe/core/services/routing/routing.dart';
@@ -51,7 +52,10 @@ class _BreatheAppState extends State<BreatheApp> {
           ],
         );
       },
-      title: "Breate",
+      title: "Breathe",
+      theme: AppTheme.lightTheme,
+      darkTheme: AppTheme.darkTheme,
+      themeMode: ThemeMode.light,
       initialRoute: Routes.init,
       getPages: RouteService.pages,
       debugShowCheckedModeBanner: false,

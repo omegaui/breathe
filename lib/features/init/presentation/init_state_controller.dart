@@ -1,11 +1,10 @@
-import 'package:breathe/common/styling/app_theme.dart';
 import 'package:breathe/config/app_assets.dart';
 import 'package:breathe/core/architecture/state_controller.dart';
 import 'package:breathe/core/services/routing/routing.dart';
 import 'package:breathe/core/services/storage/shared_storage.dart';
 import 'package:breathe/features/init/presentation/ini_state_presenter.dart';
 import 'package:breathe/features/init/presentation/init_state_machine.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class InitStateController extends StateController {
@@ -21,7 +20,9 @@ class InitStateController extends StateController {
     await storage.init();
     // initialize theme
     final theme = storage.get<String>('theme', fallback: 'light');
-    AppTheme.init(theme == 'light');
+    Get.changeThemeMode(
+      theme == 'light' ? ThemeMode.light : ThemeMode.dark,
+    );
     // precache assets
     await Future.wait([
       precacheImage(AppAssets.arrowDown, Get.context!),
