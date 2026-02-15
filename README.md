@@ -1,6 +1,6 @@
 # breathe
 
-A breathing excercise app.
+A breathing exercise app.
 
 - [x] Complete Flutter Clean Architecture
 - [x] GetX for Routing, Dependency Injection and App-wide context availablity

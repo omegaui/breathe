@@ -1,24 +1,24 @@
 import 'package:breathe/common/styling/app_theme.dart';
-import 'package:breathe/features/exercise/presentation/excercise_state_controller.dart';
-import 'package:breathe/features/exercise/presentation/excercise_state_machine.dart';
+import 'package:breathe/features/exercise/presentation/exercise_state_controller.dart';
+import 'package:breathe/features/exercise/presentation/exercise_state_machine.dart';
 import 'package:flutter/material.dart';
 
-class ExcerciseLoadingStateView extends StatefulWidget {
-  const ExcerciseLoadingStateView({
+class ExerciseLoadingStateView extends StatefulWidget {
+  const ExerciseLoadingStateView({
     super.key,
     required this.state,
     required this.controller,
   });
 
-  final ExcerciseLoadingState state;
-  final ExcerciseStateController controller;
+  final ExerciseLoadingState state;
+  final ExerciseStateController controller;
 
   @override
-  State<ExcerciseLoadingStateView> createState() =>
-      _ExcerciseLoadingStateViewState();
+  State<ExerciseLoadingStateView> createState() =>
+      _ExerciseLoadingStateViewState();
 }
 
-class _ExcerciseLoadingStateViewState extends State<ExcerciseLoadingStateView> {
+class _ExerciseLoadingStateViewState extends State<ExerciseLoadingStateView> {
   @override
   Widget build(BuildContext context) {
     final insets = MediaQuery.paddingOf(context);

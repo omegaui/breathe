@@ -1,4 +1,4 @@
-class ExcerciseSettingsEntity {
+class ExerciseSettingsEntity {
   final int durationInSeconds;
   final int rounds;
   final int breathInDuration;
@@ -7,7 +7,7 @@ class ExcerciseSettingsEntity {
   final int holdOutDuration;
   final bool allowSound;
 
-  ExcerciseSettingsEntity({
+  ExerciseSettingsEntity({
     required this.durationInSeconds,
     required this.rounds,
     required this.breathInDuration,
@@ -17,8 +17,8 @@ class ExcerciseSettingsEntity {
     required this.allowSound,
   });
 
-  factory ExcerciseSettingsEntity.initial() {
-    return ExcerciseSettingsEntity(
+  factory ExerciseSettingsEntity.initial() {
+    return ExerciseSettingsEntity(
       durationInSeconds: 4,
       rounds: 4,
       breathInDuration: 4,

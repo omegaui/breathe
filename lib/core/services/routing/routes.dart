@@ -1,8 +1,7 @@
-
 class Routes {
   Routes._();
 
-  static final String init = '/';
-  static final String home = '/home';
-  static final String excercise = '/excercise';
+  static const String init = '/';
+  static const String home = '/home';
+  static const String exercise = '/exercise';
 }

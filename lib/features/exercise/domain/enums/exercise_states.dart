@@ -1,5 +1,5 @@
 
-enum ExcerciseStates {
+enum ExerciseStates {
   idle,
   breathIn,
   holdIn,

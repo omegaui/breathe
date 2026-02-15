@@ -19,9 +19,9 @@ class _InitStateViewState extends ControlAwareState<InitStateView> {
   Widget get desktopView {
     final controller = this.controller as InitStateController;
     final currentState = controller.getCurrentState();
-    switch (currentState.runtimeType) {
-      case const (InitStartedState):
-        controller.initialize();
+    controller.initialize();
+    switch (currentState) {
+      case InitStartedState():
         return InitStartedStateView(
           state: controller.stateAs<InitStartedState>(),
           controller: controller,

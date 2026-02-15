@@ -13,10 +13,9 @@ class HomeStateMachine extends StateMachine<HomeEvent, HomeState> {
 
   @override
   void changeStateOnEvent(HomeEvent e) {
-    switch (e.runtimeType) {
-      case const (HomeLoadedEvent):
+    switch (e) {
+      case HomeLoadedEvent():
         currentState = HomeLoadedState();
-        break;
     }
   }
 }

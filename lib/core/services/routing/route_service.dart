@@ -1,6 +1,6 @@
 import 'package:breathe/core/services/routing/routes.dart';
-import 'package:breathe/features/exercise/domain/entity/excercise_settings_entity.dart';
-import 'package:breathe/features/exercise/presentation/excercise_state_view.dart';
+import 'package:breathe/features/exercise/domain/entity/exercise_settings_entity.dart';
+import 'package:breathe/features/exercise/presentation/exercise_state_view.dart';
 import 'package:breathe/features/home/presentation/home_state_view.dart';
 import 'package:breathe/features/init/presentation/init_state_view.dart';
 import 'package:get/get.dart';
@@ -12,10 +12,10 @@ class RouteService {
     GetPage(name: Routes.init, page: () => InitStateView()),
     GetPage(name: Routes.home, page: () => HomeStateView()),
     GetPage(
-      name: Routes.excercise,
+      name: Routes.exercise,
       page: () {
-        return ExcerciseStateView(
-          settings: Get.arguments['settings'] as ExcerciseSettingsEntity,
+        return ExerciseStateView(
+          settings: Get.arguments['settings'] as ExerciseSettingsEntity,
         );
       },
     ),

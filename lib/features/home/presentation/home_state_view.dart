@@ -19,9 +19,9 @@ class _HomeStateViewState extends ControlAwareState<HomeStateView> {
   Widget get desktopView {
     final controller = this.controller as HomeStateController;
     final currentState = controller.getCurrentState();
-    switch (currentState.runtimeType) {
-      case const (HomeLoadedState):
-        controller.initialize();
+    controller.initialize();
+    switch (currentState) {
+      case HomeLoadedState():
         return HomeLoadedStateView(
           state: controller.stateAs<HomeLoadedState>(),
           controller: controller,

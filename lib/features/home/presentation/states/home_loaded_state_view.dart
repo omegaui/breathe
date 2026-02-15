@@ -1,7 +1,7 @@
 import 'package:breathe/common/styling/app_text_theme.dart';
 import 'package:breathe/common/styling/app_theme.dart';
 import 'package:breathe/config/app_assets.dart';
-import 'package:breathe/features/exercise/domain/entity/excercise_settings_entity.dart';
+import 'package:breathe/features/exercise/domain/entity/exercise_settings_entity.dart';
 import 'package:breathe/features/home/presentation/home_state_controller.dart';
 import 'package:breathe/features/home/presentation/home_state_machine.dart';
 import 'package:flutter/material.dart';
@@ -256,13 +256,13 @@ class _HomeLoadedStateViewState extends State<HomeLoadedStateView> {
                       ),
                     ),
                     Gap(26),
-                    GestureDetector(
-                      onTap: () {
+                    FilledButton(
+                      onPressed: () {
                         final primaryDuration = int.parse(
                           _selectedDurationChip[0],
                         );
                         widget.controller.start(
-                          ExcerciseSettingsEntity(
+                          ExerciseSettingsEntity(
                             durationInSeconds: primaryDuration,
                             rounds: int.parse(_selectedRoundChip[0]),
                             breathInDuration: _isAdvancedOptionsVisible
@@ -281,38 +281,35 @@ class _HomeLoadedStateViewState extends State<HomeLoadedStateView> {
                           ),
                         );
                       },
-                      child: Container(
-                        width: 271,
-                        height: 56,
-                        decoration: BoxDecoration(
-                          color: colors.buttonBackground,
-                          borderRadius: .circular(32),
+                      style: FilledButton.styleFrom(
+                        backgroundColor: colors.buttonBackground,
+                        fixedSize: const Size(271, 56),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(32),
                         ),
-                        child: Center(
-                          child: Row(
-                            mainAxisSize: .min,
-                            children: [
-                              Text(
-                                "Start breathing",
-                                style:
-                                    ConfigurableTextStyle.create(FontSizes.base)
-                                        .withColor(
-                                          context.isLightMode
-                                              ? colors.backgroundColor
-                                              : Colors.white,
-                                        )
-                                        .useLato()
-                                        .makeBold(),
-                              ),
-                              Gap(8),
-                              Image(
-                                image: AppAssets.fastWind,
-                                width: 24,
-                                height: 24,
-                              ),
-                            ],
+                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            "Start breathing",
+                            style:
+                                ConfigurableTextStyle.create(FontSizes.base)
+                                    .withColor(
+                                      context.isLightMode
+                                          ? colors.backgroundColor
+                                          : Colors.white,
+                                    )
+                                    .useLato()
+                                    .makeBold(),
                           ),
-                        ),
+                          const Gap(8),
+                          Image(
+                            image: AppAssets.fastWind,
+                            width: 24,
+                            height: 24,
+                          ),
+                        ],
                       ),
                     ),
                     Gap(16),
@@ -399,6 +396,9 @@ class _HomeLoadedStateViewState extends State<HomeLoadedStateView> {
     );
   }
 
+  static const _minDuration = 1;
+  static const _maxDuration = 30;
+
   Widget buildDurationSelector(
     BuildContext context,
     String title,
@@ -406,6 +406,8 @@ class _HomeLoadedStateViewState extends State<HomeLoadedStateView> {
     required void Function(int value) onChanged,
   }) {
     final colors = context.colors;
+    final canDecrement = value > _minDuration;
+    final canIncrement = value < _maxDuration;
     return Container(
       height: 54,
       padding: .only(left: 12, right: 24),
@@ -424,30 +426,26 @@ class _HomeLoadedStateViewState extends State<HomeLoadedStateView> {
             ).withColor(colors.textTitle).makeSemiBold(),
           ),
           SizedBox(
-            width: 100, // making it constant to align contents properly
+            width: 100,
             child: Row(
               mainAxisAlignment: .spaceBetween,
               children: [
-                GestureDetector(
-                  onTap: () {
-                    if (value - 1 > 0) {
-                      onChanged(value - 1);
-                    }
-                  },
-                  child: Container(
-                    width: 26,
-                    height: 26,
-                    decoration: BoxDecoration(
-                      color: colors.backgroundColor,
-                      borderRadius: .circular(50),
-                    ),
-                    child: Center(
-                      child: Icon(
-                        Icons.remove,
-                        size: 18,
-                        color: colors.textTitle,
-                      ),
-                    ),
+                IconButton(
+                  onPressed: canDecrement
+                      ? () => onChanged(value - 1)
+                      : null,
+                  style: IconButton.styleFrom(
+                    backgroundColor: colors.backgroundColor,
+                    fixedSize: const Size(26, 26),
+                    padding: EdgeInsets.zero,
+                    minimumSize: const Size(26, 26),
+                  ),
+                  icon: Icon(
+                    Icons.remove,
+                    size: 18,
+                    color: canDecrement
+                        ? colors.textTitle
+                        : colors.textSubtitle,
                   ),
                 ),
                 Text(
@@ -456,22 +454,22 @@ class _HomeLoadedStateViewState extends State<HomeLoadedStateView> {
                     FontSizes.medium,
                   ).useLato().withColor(colors.textTitle),
                 ),
-                GestureDetector(
-                  onTap: () => onChanged(value + 1),
-                  child: Container(
-                    width: 26,
-                    height: 26,
-                    decoration: BoxDecoration(
-                      color: colors.backgroundColor,
-                      borderRadius: .circular(50),
-                    ),
-                    child: Center(
-                      child: Icon(
-                        Icons.add,
-                        size: 18,
-                        color: colors.textTitle,
-                      ),
-                    ),
+                IconButton(
+                  onPressed: canIncrement
+                      ? () => onChanged(value + 1)
+                      : null,
+                  style: IconButton.styleFrom(
+                    backgroundColor: colors.backgroundColor,
+                    fixedSize: const Size(26, 26),
+                    padding: EdgeInsets.zero,
+                    minimumSize: const Size(26, 26),
+                  ),
+                  icon: Icon(
+                    Icons.add,
+                    size: 18,
+                    color: canIncrement
+                        ? colors.textTitle
+                        : colors.textSubtitle,
                   ),
                 ),
               ],

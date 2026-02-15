@@ -13,10 +13,9 @@ class InitStateMachine extends StateMachine<InitEvent, InitState> {
 
   @override
   void changeStateOnEvent(InitEvent e) {
-    switch (e.runtimeType) {
-      case const (InitStartedEvent):
+    switch (e) {
+      case InitStartedEvent():
         currentState = InitStartedState();
-        break;
     }
   }
 }

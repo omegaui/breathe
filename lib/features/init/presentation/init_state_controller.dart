@@ -2,7 +2,7 @@ import 'package:breathe/config/app_assets.dart';
 import 'package:breathe/core/architecture/state_controller.dart';
 import 'package:breathe/core/services/routing/routing.dart';
 import 'package:breathe/core/services/storage/shared_storage.dart';
-import 'package:breathe/features/init/presentation/ini_state_presenter.dart';
+import 'package:breathe/features/init/presentation/init_state_presenter.dart';
 import 'package:breathe/features/init/presentation/init_state_machine.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -15,6 +15,8 @@ class InitStateController extends StateController {
       );
 
   void initialize() async {
+    if (isInitialized) return;
+    markInitialized();
     // initialize storage
     final storage = Get.find<SharedStorage>();
     await storage.init();

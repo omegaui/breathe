@@ -17,17 +17,17 @@ class SharedStorageImpl extends SharedStorage {
 
   @override
   Future<void> set(String key, dynamic value) async {
-    if (value.runtimeType == String) {
-      prefs.setString(key, value);
-    } else if (value.runtimeType == int) {
-      prefs.setInt(key, value);
-    } else if (value.runtimeType == double) {
-      prefs.setDouble(key, value);
-    } else if (value.runtimeType == bool) {
-      prefs.setBool(key, value);
+    if (value is String) {
+      await prefs.setString(key, value);
+    } else if (value is int) {
+      await prefs.setInt(key, value);
+    } else if (value is double) {
+      await prefs.setDouble(key, value);
+    } else if (value is bool) {
+      await prefs.setBool(key, value);
     } else {
-      throw Exception(
-        "Unknown ${value.runtimeType} encountred, cannot save $key.",
+      throw ArgumentError(
+        'Unsupported type ${value.runtimeType} for key "$key".',
       );
     }
   }
