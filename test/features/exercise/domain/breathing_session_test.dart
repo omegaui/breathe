@@ -1,19 +1,3 @@
-// ============================================================================
-// FLUTTER TEST CRASH COURSE
-// ============================================================================
-//
-// Every test file follows this structure:
-//   1. Import `flutter_test` — gives you `test()`, `group()`, `expect()`, etc.
-//   2. Import the class you're testing.
-//   3. Write a `main()` function containing your tests.
-//
-// Key concepts:
-//   - `test('description', () { ... })` — a single test case
-//   - `group('name', () { ... })` — groups related tests together
-//   - `expect(actual, matcher)` — asserts that `actual` matches `matcher`
-//   - `setUp(() { ... })` — runs before EACH test in the group
-//   - `tearDown(() { ... })` — runs after EACH test in the group
-//
 // fakeAsync:
 //   Our BreathingSession uses Timer.periodic internally. In real life, we'd
 //   have to wait real seconds. `fakeAsync` lets us control time — we call
