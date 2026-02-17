@@ -239,10 +239,7 @@ class _HomeLoadedStateViewState extends State<HomeLoadedStateView> {
                             ),
                             trailing: Switch(
                               value: _allowSound,
-                              trackColor: WidgetStatePropertyAll(
-                                Color(0xFF630068),
-                              ),
-                              thumbColor: WidgetStatePropertyAll(Colors.white),
+                              activeTrackColor: context.colors.primary,
                               padding: .all(0),
                               onChanged: (value) {
                                 setState(() {
