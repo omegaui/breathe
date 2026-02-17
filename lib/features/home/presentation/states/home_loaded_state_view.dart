@@ -4,6 +4,7 @@ import 'package:breathe/config/app_assets.dart';
 import 'package:breathe/features/exercise/domain/entity/exercise_settings_entity.dart';
 import 'package:breathe/features/home/presentation/home_state_controller.dart';
 import 'package:breathe/features/home/presentation/home_state_machine.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:gap/gap.dart';
@@ -83,7 +84,7 @@ class _HomeLoadedStateViewState extends State<HomeLoadedStateView> {
                           color: colors.borderColor,
                         ),
                       ),
-                      width: 321,
+                      width: kIsWeb ? 380 : 321,
                       padding: .symmetric(horizontal: 20, vertical: 32),
                       child: Column(
                         crossAxisAlignment: .start,
@@ -362,7 +363,7 @@ class _HomeLoadedStateViewState extends State<HomeLoadedStateView> {
                 label: Padding(
                   padding: .symmetric(
                     horizontal: horizontalPadding ? 8 : 0,
-                    vertical: 6,
+                    vertical: kIsWeb ? 0 : 6,
                   ),
                   child: Text(
                     e,
